@@ -20,7 +20,7 @@ const AdminDashboard = () => {
 
   const loadAnalytics = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/admin/analytics', {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/admin/analytics`, {
         headers: { Authorization: `Bearer ${getToken()}` }
       });
       setAnalytics(response.data);
@@ -32,7 +32,7 @@ const AdminDashboard = () => {
   const loadUsers = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:5000/api/admin/users', {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/admin/users`, {
         headers: { Authorization: `Bearer ${getToken()}` }
       });
       setUsers(response.data);
@@ -46,7 +46,7 @@ const AdminDashboard = () => {
   const loadPortfolios = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:5000/api/admin/portfolios', {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/admin/portfolios`, {
         headers: { Authorization: `Bearer ${getToken()}` }
       });
       setPortfolios(response.data);
@@ -61,7 +61,7 @@ const AdminDashboard = () => {
     if (!window.confirm('Are you sure you want to delete this user?')) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/admin/users/${userId}`, {
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/admin/users/${userId}`, {
         headers: { Authorization: `Bearer ${getToken()}` }
       });
       setMessage('User deleted successfully');
@@ -76,7 +76,7 @@ const AdminDashboard = () => {
     if (!window.confirm('Are you sure you want to delete this portfolio?')) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/admin/portfolios/${portfolioId}`, {
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/admin/portfolios/${portfolioId}`, {
         headers: { Authorization: `Bearer ${getToken()}` }
       });
       setMessage('Portfolio deleted successfully');
@@ -109,31 +109,31 @@ const AdminDashboard = () => {
       </div>
 
       <div className="admin-tabs">
-        <button 
+        <button
           className={`tab ${activeTab === 'analytics' ? 'active' : ''}`}
           onClick={() => handleTabChange('analytics')}
         >
           📊 Analytics
         </button>
-        <button 
+        <button
           className={`tab ${activeTab === 'users' ? 'active' : ''}`}
           onClick={() => handleTabChange('users')}
         >
           👥 Manage Users
         </button>
-        <button 
+        <button
           className={`tab ${activeTab === 'portfolios' ? 'active' : ''}`}
           onClick={() => handleTabChange('portfolios')}
         >
           📁 Manage Portfolios
         </button>
-        <button 
+        <button
           className={`tab ${activeTab === 'templates' ? 'active' : ''}`}
           onClick={() => handleTabChange('templates')}
         >
           🎨 Manage Templates
         </button>
-        <button 
+        <button
           className={`tab ${activeTab === 'database' ? 'active' : ''}`}
           onClick={() => handleTabChange('database')}
         >
@@ -229,7 +229,7 @@ const AdminDashboard = () => {
                         <td>{user.email}</td>
                         <td>{new Date(user.createdAt).toLocaleDateString()}</td>
                         <td>
-                          <button 
+                          <button
                             className="delete-btn"
                             onClick={() => deleteUser(user._id)}
                           >
@@ -276,7 +276,7 @@ const AdminDashboard = () => {
                         </td>
                         <td>{new Date(portfolio.createdAt).toLocaleDateString()}</td>
                         <td>
-                          <button 
+                          <button
                             className="delete-btn"
                             onClick={() => deletePortfolio(portfolio._id)}
                           >
@@ -298,7 +298,7 @@ const AdminDashboard = () => {
           <div className="templates-section">
             <h3>Manage Templates</h3>
             <p className="section-description">Add or update portfolio themes and make them live for students</p>
-            
+
             <div className="current-templates">
               <h4>Current Live Templates</h4>
               <div className="template-grid">
@@ -332,20 +332,20 @@ const AdminDashboard = () => {
           <div className="database-section">
             <h3>Database Management</h3>
             <p className="section-description">Backup data and maintain system stability</p>
-            
+
             <div className="db-actions">
               <div className="db-card">
                 <h4>💾 Backup Database</h4>
                 <p>Create a backup of all user data and portfolios</p>
                 <button className="action-btn backup">Create Backup</button>
               </div>
-              
+
               <div className="db-card">
                 <h4>🧹 Clean Unused Data</h4>
                 <p>Remove unpublished portfolios older than 30 days</p>
                 <button className="action-btn clean">Clean Database</button>
               </div>
-              
+
               <div className="db-card">
                 <h4>📊 Database Stats</h4>
                 <p>Total Records: {analytics?.totalUsers + analytics?.totalPortfolios || 0}</p>

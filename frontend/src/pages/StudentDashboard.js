@@ -252,7 +252,12 @@ const StudentDashboard = () => {
     { value: 'light', label: 'Light' },
     { value: 'minimalist', label: 'Minimalist' },
     { value: 'gradient', label: 'Gradient' },
-    { value: 'neon', label: 'Neon' }
+    { value: 'neon', label: 'Neon' },
+    { value: 'ocean', label: 'Ocean' },
+    { value: 'sunset', label: 'Sunset' },
+    { value: 'forest', label: 'Forest' },
+    { value: 'cyberpunk', label: 'Cyberpunk' },
+    { value: 'pastel', label: 'Pastel' }
   ];
 
   // Handle input changes
@@ -271,7 +276,7 @@ const StudentDashboard = () => {
     formDataImg.append('image', file);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/resume/upload-image', formDataImg, {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/resume/upload-image`, formDataImg, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
 
@@ -391,12 +396,12 @@ const StudentDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        'http://localhost:5000/api/portfolio/create',
+        `${process.env.REACT_APP_API_URL}/api/portfolio/create`,
         formData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      const portfolioUrl = `http://localhost:3000/p/${response.data.portfolio.uniqueUrl}`;
+      const portfolioUrl = `${process.env.REACT_APP_FRONTEND_URL}/p/${response.data.portfolio.uniqueUrl}`;
 
       setMessage(
         <div style={{

@@ -7,19 +7,21 @@
 
 .portfolio-container {
   min-height: 100vh;
-  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   position: relative;
   overflow-x: hidden;
 }
 
 /* Custom Cursor */
 .portfolio-container {
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="%23667eea" opacity="0.5"/></svg>'), auto;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="%23667eea" opacity="0.5"/></svg>'),
+    auto;
 }
 
 .portfolio-container a,
 .portfolio-container button {
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="%23667eea"/></svg>'), pointer;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="%23667eea"/></svg>'),
+    pointer;
 }
 
 /* Loading & Error States */
@@ -129,6 +131,18 @@
   }
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 0.85;
+    transform: translateY(0);
+  }
+}
+
 .welcome-text {
   font-size: 1.3rem;
   opacity: 0.8;
@@ -153,14 +167,10 @@
   transition: all 0.3s ease;
 }
 
-.section-title:hover {
-  transform: translateX(10px);
-  text-shadow: 0 0 20px currentColor;
-  color: #667eea;
-}
+/* Removed global hover - now handled per theme for proper contrast */
 
 .section-title::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -4px;
   left: 0;
@@ -449,7 +459,7 @@
 
 /* Brand-specific colors */
 .social-link.email {
-  background: #EA4335;
+  background: #ea4335;
   color: white;
 }
 
@@ -458,7 +468,7 @@
 }
 
 .social-link.whatsapp {
-  background: #25D366;
+  background: #25d366;
   color: white;
 }
 
@@ -476,7 +486,7 @@
 }
 
 .social-link.linkedin {
-  background: #0A66C2;
+  background: #0a66c2;
   color: white;
 }
 
@@ -485,12 +495,22 @@
 }
 
 .social-link.instagram {
-  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  background: linear-gradient(45deg,
+      #f09433 0%,
+      #e6683c 25%,
+      #dc2743 50%,
+      #cc2366 75%,
+      #bc1888 100%);
   color: white;
 }
 
 .social-link.instagram:hover {
-  background: linear-gradient(45deg, #d17d2a 0%, #c95a31 25%, #b91f37 50%, #a91c57 75%, #9a1575 100%);
+  background: linear-gradient(45deg,
+      #d17d2a 0%,
+      #c95a31 25%,
+      #b91f37 50%,
+      #a91c57 75%,
+      #9a1575 100%);
 }
 
 /* Footer */
@@ -570,7 +590,36 @@
 
 .theme-light .section-title {
   border-color: #667eea;
-  color: #333;
+  color: #1a1a1a !important;
+  /* Darker for better visibility */
+}
+
+.theme-light .section-title:hover {
+  text-shadow: none;
+  /* Remove blur */
+  transform: translateX(10px) scale(1.02);
+  /* Pop effect */
+  color: #000;
+}
+
+.theme-light .greeting,
+.theme-light .welcome-text,
+.theme-light .about-text {
+  color: #1a1a1a !important;
+  /* Ensure dark text on light background */
+}
+
+.theme-light .about-card {
+  background: white;
+  border: 1px solid #667eea;
+  color: #1a1a1a;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.theme-light .about-card:hover {
+  transform: translateY(-5px) scale(1.01);
+  /* Pop on hover */
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
 }
 
 .theme-light .education-card,
@@ -579,8 +628,34 @@
 .theme-light .achievement-card {
   background: #f8f9fa;
   border-color: #667eea;
-  color: #333;
+  color: #1a1a1a !important;
+  /* Darker text */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Force all text inside cards to be dark */
+.theme-light .institution-name,
+.theme-light .degree-name,
+.theme-light .job-title,
+.theme-light .company-name,
+.theme-light .project-name,
+.theme-light .project-description,
+.theme-light .job-description,
+.theme-light .achievement-text,
+.theme-light .year,
+.theme-light .grade,
+.theme-light .duration,
+.theme-light .skill-name {
+  color: #1a1a1a !important;
+}
+
+.theme-light .education-card:hover,
+.theme-light .project-card:hover,
+.theme-light .experience-card:hover,
+.theme-light .achievement-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  /* Pop effect */
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
 }
 
 .theme-light .skill-badge {
@@ -621,7 +696,22 @@
 
 .theme-minimalist .section-title {
   border-color: #2c2c2c;
-  color: #2c2c2c;
+  color: #2c2c2c !important;
+}
+
+.theme-minimalist .section-title:hover {
+  text-shadow: none;
+  /* Remove blurry glow for minimalist */
+  transform: translateX(10px) scale(1.02);
+  /* Pop effect */
+  color: #000;
+}
+
+.theme-minimalist .greeting,
+.theme-minimalist .welcome-text,
+.theme-minimalist .about-text {
+  color: #1a1a1a !important;
+  /* Ensure very dark text */
 }
 
 .theme-minimalist .name-highlight {
@@ -630,14 +720,54 @@
   -webkit-text-fill-color: transparent;
 }
 
+.theme-minimalist .about-card {
+  background: white;
+  border: 1px solid #2c2c2c;
+  color: #1a1a1a;
+  /* Darker text */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.theme-minimalist .about-card:hover {
+  transform: translateY(-5px) scale(1.01);
+  /* Pop on hover */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
 .theme-minimalist .education-card,
 .theme-minimalist .project-card,
 .theme-minimalist .experience-card,
 .theme-minimalist .achievement-card {
   background: white;
   border-color: #2c2c2c;
-  color: #2c2c2c;
+  color: #1a1a1a !important;
+  /* Darker text for visibility */
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Force all text inside cards to be dark */
+.theme-minimalist .institution-name,
+.theme-minimalist .degree-name,
+.theme-minimalist .job-title,
+.theme-minimalist .company-name,
+.theme-minimalist .project-name,
+.theme-minimalist .project-description,
+.theme-minimalist .job-description,
+.theme-minimalist .achievement-text,
+.theme-minimalist .year,
+.theme-minimalist .grade,
+.theme-minimalist .duration,
+.theme-minimalist .skill-name {
+  color: #1a1a1a !important;
+}
+
+.theme-minimalist .education-card:hover,
+.theme-minimalist .project-card:hover,
+.theme-minimalist .experience-card:hover,
+.theme-minimalist .achievement-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  /* Pop effect */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .theme-minimalist .skill-badge {
@@ -999,6 +1129,341 @@
   }
 }
 
+/* ==================== NEW THEMES ==================== */
+
+/* Ocean/Aqua Theme */
+.theme-ocean {
+  background: linear-gradient(135deg, #006D77 0%, #83C5BE 100%);
+  color: #EDF6F9;
+}
+
+.theme-ocean .profile-image {
+  border-color: #83C5BE;
+}
+
+.theme-ocean .name-highlight {
+  background: #E0B0FF;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #E0B0FF;
+  background-clip: text;
+}
+
+.theme-ocean .section-title {
+  border-color: #83C5BE;
+  color: #EDF6F9;
+}
+
+.theme-ocean .about-card,
+.theme-ocean .education-card,
+.theme-ocean .project-card,
+.theme-ocean .experience-card,
+.theme-ocean .achievement-card {
+  background: rgba(131, 197, 190, 0.15);
+  border-color: #83C5BE;
+  color: #EDF6F9;
+}
+
+.theme-ocean .skill-badge {
+  background: linear-gradient(135deg, #006D77 0%, #52B2BF 100%);
+  color: white;
+}
+
+.theme-ocean .tech-tag {
+  background: #52B2BF;
+  color: white;
+}
+
+.theme-ocean .social-link {
+  background: rgba(131, 197, 190, 0.2);
+  color: #EDF6F9;
+  border: 2px solid #83C5BE;
+}
+
+.theme-ocean .social-link:hover {
+  background: #83C5BE;
+  color: #006D77;
+}
+
+.theme-ocean .project-link {
+  background: #83C5BE;
+  color: #006D77;
+}
+
+.theme-ocean .portfolio-footer {
+  border-color: #83C5BE;
+}
+
+/* Sunset/Warm Theme */
+.theme-sunset {
+  background: #8B2C5F;
+  color: #FFE5B4;
+}
+
+.theme-sunset .profile-image {
+  border-color: #FFA07A;
+}
+
+.theme-sunset .section-title {
+  border-color: #FFA07A;
+  color: #FFE5B4;
+}
+
+.theme-sunset .about-card,
+.theme-sunset .education-card,
+.theme-sunset .project-card,
+.theme-sunset .experience-card,
+.theme-sunset .achievement-card {
+  background: rgba(255, 160, 122, 0.15);
+  border-color: #FFA07A;
+  color: #FFE5B4;
+}
+
+.theme-sunset .skill-badge {
+  background: linear-gradient(135deg, #FF6B6B 0%, #FFA07A 100%);
+  color: white;
+}
+
+.theme-sunset .tech-tag {
+  background: #FF6B6B;
+  color: white;
+}
+
+.theme-sunset .social-link {
+  background: rgba(255, 160, 122, 0.2);
+  color: #FFE5B4;
+  border: 2px solid #FFA07A;
+}
+
+.theme-sunset .social-link:hover {
+  background: #FFA07A;
+  color: #4A0E4E;
+}
+
+.theme-sunset .project-link {
+  background: #FFA07A;
+  color: #4A0E4E;
+}
+
+.theme-sunset .portfolio-footer {
+  border-color: #FFA07A;
+}
+
+/* Forest/Nature Theme */
+.theme-forest {
+  background: linear-gradient(135deg, #2D6A4F 0%, #95D5B2 100%);
+  color: #F1FAEE;
+}
+
+.theme-forest .profile-image {
+  border-color: #95D5B2;
+}
+
+.theme-forest .name-highlight {
+  background: #6B21A8;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #6B21A8;
+  background-clip: text;
+}
+
+.theme-forest .section-title {
+  border-color: #95D5B2;
+  color: #F1FAEE;
+}
+
+.theme-forest .about-card,
+.theme-forest .education-card,
+.theme-forest .project-card,
+.theme-forest .experience-card,
+.theme-forest .achievement-card {
+  background: rgba(149, 213, 178, 0.15);
+  border-color: #95D5B2;
+  color: #F1FAEE;
+}
+
+.theme-forest .project-card:hover,
+.theme-forest .experience-card:hover,
+.theme-forest .achievement-card:hover {
+  background: rgba(45, 106, 79, 0.4);
+  border-color: #52B788;
+}
+
+.theme-forest .skill-badge {
+  background: linear-gradient(135deg, #2D6A4F 0%, #52B788 100%);
+  color: white;
+}
+
+.theme-forest .tech-tag {
+  background: #52B788;
+  color: white;
+}
+
+.theme-forest .social-link {
+  background: rgba(149, 213, 178, 0.2);
+  color: #F1FAEE;
+  border: 2px solid #95D5B2;
+}
+
+.theme-forest .social-link:hover {
+  background: #95D5B2;
+  color: #2D6A4F;
+}
+
+.theme-forest .project-link {
+  background: #95D5B2;
+  color: #2D6A4F;
+}
+
+.theme-forest .portfolio-footer {
+  border-color: #95D5B2;
+}
+
+/* Cyberpunk Theme */
+.theme-cyberpunk {
+  background: #0A0E27;
+  color: #00F5FF;
+}
+
+.theme-cyberpunk .profile-image {
+  border-color: #FF006E;
+  box-shadow: 0 0 30px rgba(255, 0, 110, 0.5);
+}
+
+.theme-cyberpunk .section-title {
+  border-color: #FF006E;
+  color: #00F5FF;
+  text-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
+}
+
+.theme-cyberpunk .about-card,
+.theme-cyberpunk .education-card,
+.theme-cyberpunk .project-card,
+.theme-cyberpunk .experience-card,
+.theme-cyberpunk .achievement-card {
+  background: rgba(131, 56, 236, 0.1);
+  border-color: #8338EC;
+  color: #00F5FF;
+  box-shadow: 0 0 20px rgba(131, 56, 236, 0.3);
+}
+
+.theme-cyberpunk .skill-badge {
+  background: linear-gradient(135deg, #FF006E 0%, #8338EC 100%);
+  color: white;
+  box-shadow: 0 0 15px rgba(255, 0, 110, 0.4);
+}
+
+.theme-cyberpunk .tech-tag {
+  background: #8338EC;
+  color: white;
+  box-shadow: 0 0 10px rgba(131, 56, 236, 0.5);
+}
+
+.theme-cyberpunk .social-link {
+  background: rgba(255, 0, 110, 0.1);
+  color: #00F5FF;
+  border: 2px solid #FF006E;
+  box-shadow: 0 0 15px rgba(255, 0, 110, 0.3);
+}
+
+.theme-cyberpunk .social-link:hover {
+  background: #FF006E;
+  color: #0A0E27;
+  box-shadow: 0 0 25px rgba(255, 0, 110, 0.6);
+}
+
+.theme-cyberpunk .project-link {
+  background: linear-gradient(135deg, #FF006E 0%, #8338EC 100%);
+  color: white;
+}
+
+.theme-cyberpunk .portfolio-footer {
+  border-color: #8338EC;
+}
+
+/* Pastel/Soft Theme */
+.theme-pastel {
+  background: #FFB3C6;
+  color: #2C2C2C;
+}
+
+.theme-pastel .profile-image {
+  border-color: #C3B1E1;
+}
+
+.theme-pastel .section-title {
+  border-color: #C3B1E1;
+  color: #2C2C2C;
+}
+
+.theme-pastel .greeting,
+.theme-pastel .welcome-text,
+.theme-pastel .about-text {
+  color: #2C2C2C !important;
+}
+
+.theme-pastel .about-card,
+.theme-pastel .education-card,
+.theme-pastel .project-card,
+.theme-pastel .experience-card,
+.theme-pastel .achievement-card {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: #C3B1E1;
+  color: #2C2C2C;
+}
+
+.theme-pastel .project-card:hover,
+.theme-pastel .experience-card:hover,
+.theme-pastel .achievement-card:hover {
+  background: rgba(195, 177, 225, 0.3);
+  border-color: #9B7EBD;
+}
+
+.theme-pastel .institution-name,
+.theme-pastel .degree-name,
+.theme-pastel .job-title,
+.theme-pastel .company-name,
+.theme-pastel .project-name,
+.theme-pastel .project-description,
+.theme-pastel .job-description,
+.theme-pastel .achievement-text,
+.theme-pastel .year,
+.theme-pastel .grade,
+.theme-pastel .duration,
+.theme-pastel .skill-name {
+  color: #2C2C2C !important;
+}
+
+.theme-pastel .skill-badge {
+  background: #9B7EBD;
+  color: white;
+  border: 2px solid #C3B1E1;
+}
+
+.theme-pastel .tech-tag {
+  background: #C3B1E1;
+  color: white;
+}
+
+.theme-pastel .social-link {
+  background: rgba(255, 255, 255, 0.7);
+  color: #2C2C2C;
+  border: 2px solid #C3B1E1;
+}
+
+.theme-pastel .social-link:hover {
+  background: #C3B1E1;
+  color: white;
+}
+
+.theme-pastel .project-link {
+  background: linear-gradient(135deg, #FFB3C6 0%, #C3B1E1 100%);
+  color: white;
+}
+
+.theme-pastel .portfolio-footer {
+  border-color: #C3B1E1;
+}
+
+
 /* ==================== RESPONSIVE ==================== */
 
 @media (max-width: 768px) {
@@ -1062,4 +1527,33 @@
   .skills-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ==================== NUCLEAR FIX FOR LIGHT THEMES ==================== */
+/* Force ALL text to be black in light/minimalist themes */
+.theme-light *,
+.theme-light *::before,
+.theme-light *::after {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+.theme-minimalist *,
+.theme-minimalist *::before,
+.theme-minimalist *::after {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Keep skill badges and tech tags with their colored backgrounds */
+.theme-light .skill-badge,
+.theme-minimalist .skill-badge {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+.theme-light .tech-tag,
+.theme-minimalist .tech-tag {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
 }

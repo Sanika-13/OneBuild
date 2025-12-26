@@ -9,6 +9,7 @@ const titles = [
     "No Need Of Coding",
     "Build within 2 Minutes",
     "Now, No Need of Multiple Drag & Drop",
+    "Simple and User Friendly",
     "No need of Designing"
 ];
 
@@ -17,6 +18,40 @@ const LandingPage = () => {
     const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
     const [displayedText, setDisplayedText] = useState('');
     const [isDeleting, setIsDeleting] = useState(false);
+    const [deferredPrompt, setDeferredPrompt] = useState(null);
+    const [showInstallButton, setShowInstallButton] = useState(false);
+
+    // PWA Install Handler
+    useEffect(() => {
+        const handleBeforeInstallPrompt = (e) => {
+            e.preventDefault();
+            setDeferredPrompt(e);
+            setShowInstallButton(true);
+        };
+
+        window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+        return () => {
+            window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+        };
+    }, []);
+
+    const handleInstallClick = async () => {
+        if (!deferredPrompt) {
+            alert('App is already installed or installation is not available on this device.');
+            return;
+        }
+
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+
+        if (outcome === 'accepted') {
+            console.log('User accepted the install prompt');
+        }
+
+        setDeferredPrompt(null);
+        setShowInstallButton(false);
+    };
 
     useEffect(() => {
         const currentFullTitle = titles[currentTitleIndex];
@@ -74,6 +109,9 @@ const LandingPage = () => {
                         <a href="#contact">Contact Us</a>
                         <button onClick={() => navigate('/login')} className="nav-btn login-btn">Login</button>
                         <button onClick={() => navigate('/register')} className="nav-btn register-btn">Register</button>
+                        <button onClick={handleInstallClick} className="nav-btn download-btn">
+                            Download App
+                        </button>
                     </div>
                 </div>
             </nav>
@@ -121,7 +159,7 @@ const LandingPage = () => {
                             <div className="step-number">1</div>
                             <div className="step-icon">📝</div>
                             <h3>Enter Details</h3>
-                            <p>Fill in your education, skills, and projects in our simple form.</p>
+                            <p>Fill your skills and projects, experience in our simple form.</p>
                         </div>
                         <div className="step-arrow">➜</div>
                         <div className="step-card">
@@ -149,7 +187,7 @@ const LandingPage = () => {
                         <div className="feature-card">
                             <div className="feature-icon">🎨</div>
                             <h3>Multiple Themes</h3>
-                            <p>Choose from 5 beautiful themes to match your style</p>
+                            <p>Choose the multiple themes to match your styles</p>
                         </div>
                         <div className="feature-card">
                             <div className="feature-icon">⚡</div>

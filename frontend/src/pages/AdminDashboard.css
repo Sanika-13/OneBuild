@@ -109,11 +109,13 @@
   opacity: 0.9;
 }
 
-.theme-distribution, .recent-portfolios {
+.theme-distribution,
+.recent-portfolios {
   margin-bottom: 30px;
 }
 
-.theme-distribution h4, .recent-portfolios h4 {
+.theme-distribution h4,
+.recent-portfolios h4 {
   color: #333;
   margin-bottom: 15px;
 }
